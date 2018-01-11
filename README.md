@@ -1,6 +1,6 @@
 # address
 
-仅限中国地区的地址服务（采用淘宝网地址选择器中国地址库地址信息）
+仅限中国地区的三或四级联动地址服务（采用淘宝网地址选择器中国地址库地址信息），顶级(0)为中国，一级(1)为省级/省级行政区，二级(2)为市级，三级(3)为区/县，四级(4)为街道级别。
 
 # build 
 
@@ -16,8 +16,8 @@
 
 http://host:port/address/scan?areaCode={areaCode}&children={true|false}
 >参数可都为空
-
-> @param children 为请求是否包含下级地址列表
+>@param areaCode 地址编号
+>@param children(default:true) 为请求是否包含下级地址列表
 
 示例: http://localhost:8080/address/scan
 ```json
