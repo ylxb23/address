@@ -26,6 +26,7 @@ repositories {
 }
 
 ext {
+    httpclientVersion                      = '4.5.3'
 	druidVersion                           = '1.1.5'
 	fastjsonVersion                        = '1.2.39'
     lombokVersion                          = '1.16.18'
@@ -39,6 +40,8 @@ ext {
         fastjson:                         "com.alibaba:fastjson:${fastjsonVersion}",
         hsql:                             "org.hsqldb:hsqldb",
 		jdbcConnector:                    "mysql:mysql-connector-java",
+		
+		httpclient:                       "org.apache.httpcomponents:httpclient:${httpclientVersion}",
 		
 		lombok:                           "org.projectlombok:lombok:${lombokVersion}",
 		// 状态机
@@ -70,6 +73,7 @@ dependencies {
     
     compile(libraries.jdbcConnector)
     compile(libraries.druid)
+    compile(libraries.httpclient)
     compile(libraries.springBootWeb)
     
     compile(libraries.springBootMyBatis)

@@ -1,6 +1,6 @@
 package com.zero.address.domain.service;
 
-import com.zero.address.domain.request.AddressGetRequest;
+import com.zero.address.domain.request.AddressScanRequest;
 import com.zero.address.domain.response.AddressVo;
 
 /**
@@ -15,6 +15,6 @@ public interface AddressService {
 	 * @param reqObj
 	 * @return
 	 */
-	AddressVo scanAddress(AddressGetRequest reqObj);
+	AddressVo scanAddress(AddressScanRequest reqObj);
 
 }

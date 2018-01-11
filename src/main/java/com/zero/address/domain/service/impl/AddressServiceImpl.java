@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
 import com.zero.address.dao.entity.Area;
 import com.zero.address.dao.entity.AreaExample;
 import com.zero.address.dao.repository.AreaMapper;
-import com.zero.address.domain.request.AddressGetRequest;
+import com.zero.address.domain.request.AddressScanRequest;
 import com.zero.address.domain.response.AddressVo;
 import com.zero.address.domain.service.AddressService;
 
@@ -32,10 +32,11 @@ public class AddressServiceImpl implements AddressService {
 	 * @return
 	 */
 	@Override
-	public AddressVo scanAddress(AddressGetRequest reqObj) {
+	public AddressVo scanAddress(AddressScanRequest reqObj) {
 		AreaExample example = new AreaExample();
+		AreaExample.Criteria c = example.createCriteria();
 		if(!StringUtils.isEmpty(reqObj.getAreaCode())) {
-			example.createCriteria().andAreaCodeEqualTo(reqObj.getAreaCode());
+			c.andAreaCodeEqualTo(reqObj.getAreaCode());
 		}
 		List<Area> areas = areaMapper.selectByExample(example);
 		Assert.notEmpty(areas, "传入的地区编码有误");

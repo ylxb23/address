@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zero.address.domain.request.AddressGetRequest;
+import com.zero.address.domain.request.AddressScanRequest;
 import com.zero.address.domain.response.AddressVo;
 import com.zero.address.domain.service.AddressService;
 
@@ -32,7 +32,7 @@ public class AddressController {
 	 * @return
 	 */
 	@RequestMapping(value="/scan", method= {RequestMethod.GET, RequestMethod.POST})
-	public ResponseEntity<AddressVo> getAddressInfo(HttpServletRequest request, AddressGetRequest reqObj) {
+	public ResponseEntity<AddressVo> getAddressInfo(HttpServletRequest request, AddressScanRequest reqObj) {
 		Assert.notNull(reqObj, "请求参数有误");
 		AddressVo address = addressService.scanAddress(reqObj);
 		return ResponseEntity.ok(address);

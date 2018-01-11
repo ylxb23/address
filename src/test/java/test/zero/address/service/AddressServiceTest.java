@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zero.address.domain.request.AddressGetRequest;
+import com.zero.address.domain.request.AddressScanRequest;
 import com.zero.address.domain.response.AddressVo;
 import com.zero.address.domain.service.AddressService;
 
@@ -25,7 +25,7 @@ public class AddressServiceTest extends TestBasic {
 	
 	@Test
 	public void testScanAddress() {
-		AddressGetRequest reqObj = new AddressGetRequest();
+		AddressScanRequest reqObj = new AddressScanRequest();
 		reqObj.setAreaCode("310100");	// 上海
 		AddressVo address = addressService.scanAddress(reqObj);
 		logger.info("scan address[{}] result: {}", JSONObject.toJSONString(reqObj), JSONObject.toJSONString(address));
