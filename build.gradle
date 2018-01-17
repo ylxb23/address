@@ -48,6 +48,7 @@ ext {
 		springStatusmachine:              "org.springframework.statemachine:spring-statemachine-core:${springStatemachineVersion}",
 		
 		springBoot:                       "org.springframework.boot:spring-boot-starter",
+		log4j2YmlSupport:                 "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml",
 		springBootLog4j2:                 "org.springframework.boot:spring-boot-starter-log4j2",
 		springBootJdbc:                   "org.springframework.boot:spring-boot-starter-jdbc",
 		springBootMail:                   "org.springframework.boot:spring-boot-starter-mail",
@@ -67,23 +68,28 @@ ext {
 }
 
 dependencies {
-//  compile(libraries.hsql) // spring-boot 内置数据库
     compile(libraries.lombok)
     compile(libraries.fastjson)
     
     compile(libraries.jdbcConnector)
     compile(libraries.druid)
     compile(libraries.httpclient)
-    compile(libraries.springBootWeb)
-    
-    compile(libraries.springBootMyBatis)
-    
-    testCompile(libraries.springBootTest)
-    testCompile(libraries.junit)
-    
+    compile(libraries.springBootWeb) {
+        exclude group:'org.springframework.boot', module:'spring-boot-starter'
+    }
+    compile(libraries.springBootMyBatis) {
+        exclude group:'org.springframework.boot', module:'spring-boot-starter'
+    }
+    compile(libraries.springBootLog4j2)
+    compile(libraries.log4j2YmlSupport)
     compile(libraries.springBoot) {
         exclude group:'org.springframework.boot', module:'spring-boot-starter-logging'
     }
+    
+    testCompile(libraries.springBootTest) {
+        exclude group:'org.springframework.boot', module:'spring-boot-starter'
+    }
+    testCompile(libraries.junit)
 }
 
 test {
