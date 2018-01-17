@@ -1,5 +1,7 @@
 package com.zero.address.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zero.address.domain.request.AddressScanRequest;
 import com.zero.address.domain.response.AddressVo;
+import com.zero.address.domain.response.CountryVo;
 import com.zero.address.domain.service.AddressService;
 
 /**
@@ -38,4 +41,13 @@ public class AddressController {
 		return ResponseEntity.ok(address);
 	}
 	
+	/**
+	 * 获取国家列表
+	 * @return
+	 */
+	@RequestMapping(value="/countries", method= {RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity<List<CountryVo>> getCountryList() {
+		List<CountryVo> countries = addressService.countries();
+		return ResponseEntity.ok(countries);
+	}
 }

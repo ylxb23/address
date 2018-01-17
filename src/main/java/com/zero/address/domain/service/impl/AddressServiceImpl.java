@@ -1,8 +1,10 @@
 package com.zero.address.domain.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -10,9 +12,13 @@ import org.springframework.util.StringUtils;
 
 import com.zero.address.dao.entity.Area;
 import com.zero.address.dao.entity.AreaExample;
+import com.zero.address.dao.entity.Country;
+import com.zero.address.dao.entity.CountryExample;
 import com.zero.address.dao.repository.AreaMapper;
+import com.zero.address.dao.repository.CountryMapper;
 import com.zero.address.domain.request.AddressScanRequest;
 import com.zero.address.domain.response.AddressVo;
+import com.zero.address.domain.response.CountryVo;
 import com.zero.address.domain.service.AddressService;
 
 /**
@@ -25,6 +31,9 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AreaMapper areaMapper;
+	
+	@Autowired
+	private CountryMapper countryMapper;
 	
 	/**
 	 * 获取下一级三级地址
@@ -65,6 +74,22 @@ public class AddressServiceImpl implements AddressService {
 		child.setParentCode(area.getParentCode());
 		child.setType(area.getType());
 		return child;
+	}
+	
+	/**
+	 * 获取所有国家
+	 */
+	@Override
+	public List<CountryVo> countries() {
+		CountryExample example = new CountryExample();
+		example.createCriteria();
+		List<Country> countries = countryMapper.selectByExample(example);
+		if(countries == null) {
+			return new ArrayList<>();
+		}
+		return countries.stream()
+				.map(item -> {CountryVo vo = new CountryVo(); BeanUtils.copyProperties(item, vo); return vo;})
+				.collect(Collectors.toList());
 	}
 
 }
