@@ -25,7 +25,7 @@ Configuration:
         onMatch: ACCEPT  
         onMismatch: DENY  
       PatternLayout:  
-        pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"  
+        pattern: "[%d{yyyy-MM-dd HH:mm:ss,SSS}] [%4p] [%t] (%F:%L) - %m%n"  
     RollingFile: # 输出到文件，超过128MB归档  
       - name: ROLLING_FILE  
         ignoreExceptions: false  
