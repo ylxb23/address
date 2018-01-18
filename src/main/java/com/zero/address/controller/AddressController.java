@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,7 @@ import com.zero.address.domain.response.CountryVo;
 import com.zero.address.domain.service.AddressService;
 
 /**
- * HTTP 接口
+ * RESTful(Representational State Transfer) HTTP 接口
  * @date 2018年1月10日 下午5:40:15
  * @author zero
  */
@@ -34,9 +33,11 @@ public class AddressController {
 	 * @param reqObj
 	 * @return
 	 */
-	@RequestMapping(value="/scan", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/areas", method= {RequestMethod.GET})
 	public ResponseEntity<AddressVo> getAddressInfo(HttpServletRequest request, AddressScanRequest reqObj) {
-		Assert.notNull(reqObj, "请求参数有误");
+		if(reqObj == null) {
+			reqObj = new AddressScanRequest();
+		}
 		AddressVo address = addressService.scanAddress(reqObj);
 		return ResponseEntity.ok(address);
 	}
@@ -45,7 +46,7 @@ public class AddressController {
 	 * 获取国家列表
 	 * @return
 	 */
-	@RequestMapping(value="/countries", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/countries", method= {RequestMethod.GET})
 	public ResponseEntity<List<CountryVo>> getCountryList() {
 		List<CountryVo> countries = addressService.countries();
 		return ResponseEntity.ok(countries);
