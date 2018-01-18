@@ -11,10 +11,16 @@
 - spring-boot
 - mybatis
 - fastjson
+- httpclient
 
-# http-rest-api
+# RESTful
 
-http://host:port/address/scan?areaCode={areaCode}&children={true|false}
+## 获取国家/地区列表
+http://host:port/address/countries
+
+
+## 四级地址服务
+http://host:port/address/areas?areaCode={areaCode}&children={true|false}
 >参数可都为空
 >@param areaCode 地址编号
 >@param children(default:true) 为请求是否包含下级地址列表
