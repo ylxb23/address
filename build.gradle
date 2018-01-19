@@ -51,6 +51,7 @@ ext {
 		log4j2YmlSupport:                 "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml",
 		springBootLog4j2:                 "org.springframework.boot:spring-boot-starter-log4j2",
 		springBootJdbc:                   "org.springframework.boot:spring-boot-starter-jdbc",
+		springBootDataRedis:              "org.springframework.boot:spring-boot-starter-data-redis",
 		springBootMail:                   "org.springframework.boot:spring-boot-starter-mail",
 		springBootVelocity:               "org.springframework.boot:spring-boot-starter-velocity",
 		springBootFreemarker:             "org.springframework.boot:spring-boot-starter-freemarker",
@@ -78,6 +79,9 @@ dependencies {
         exclude group:'org.springframework.boot', module:'spring-boot-starter'
     }
     compile(libraries.springBootMyBatis) {
+        exclude group:'org.springframework.boot', module:'spring-boot-starter'
+    }
+    compile(libraries.springBootDataRedis) {
         exclude group:'org.springframework.boot', module:'spring-boot-starter'
     }
     compile(libraries.springBootLog4j2)

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -41,11 +42,12 @@ public class AddressServiceImpl implements AddressService {
 	 * @return
 	 */
 	@Override
+	@Cacheable(value="address-scanAddress", keyGenerator="keyGenerator")
 	public AddressVo scanAddress(AddressScanRequest reqObj) {
 		AreaExample example = new AreaExample();
 		AreaExample.Criteria c = example.createCriteria();
 		if(!StringUtils.isEmpty(reqObj.getAreaCode())) {
-			c.andAreaCodeEqualTo(reqObj.getAreaCode());
+			c.andAreaCodeEqualTo(reqObj.getAreaCode()).andTypeEqualTo((byte) 0);
 		}
 		List<Area> areas = areaMapper.selectByExample(example);
 		Assert.notEmpty(areas, "传入的地区编码有误");
@@ -80,6 +82,7 @@ public class AddressServiceImpl implements AddressService {
 	 * 获取所有国家
 	 */
 	@Override
+	@Cacheable(value="address-countries", keyGenerator="keyGenerator")
 	public List<CountryVo> countries() {
 		CountryExample example = new CountryExample();
 		example.createCriteria();
