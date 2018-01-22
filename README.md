@@ -6,6 +6,13 @@
 
 使用 gradle构建,默认端口 8080
 
+# using
+```bash
+gradle build
+# 在 ${projectHome}/build/libs/ 路径下找到 address-1.0.jar,执行:
+java -jar address-1.0.jar
+```
+
 # dependencies
 
 - spring-boot
@@ -20,12 +27,12 @@ http://host:port/address/countries
 
 
 ## 四级地址服务
-http://host:port/address/areas?areaCode={areaCode}&children={true|false}
+GET/ http://host:port/address/areas?areaCode={areaCode}&children={true|false}
 >参数可都为空
 >@param areaCode 地址编号
 >@param children(default:true) 为请求是否包含下级地址列表
 
-示例: http://localhost:8080/address/scan
+示例: GET/ http://localhost:8080/address/areas
 ```json
 {
     "areaCode":"1",
