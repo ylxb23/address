@@ -7,6 +7,7 @@
 使用 gradle构建,默认端口 8080
 
 # using
+配置文件 datasource.properties中该为自己的数据库连接，和redis(cache)连接即可。
 ```bash
 gradle build
 # 在 ${projectHome}/build/libs/ 路径下找到 address-1.0.jar,执行:
